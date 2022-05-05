@@ -1,0 +1,7 @@
+.card {
+    color: #fff;
+    width: 400px;
+    backgroundColor: #abe9cd;
+    backgroundImage: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
+    direction: ltr;
+}
