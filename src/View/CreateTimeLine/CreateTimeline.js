@@ -9,13 +9,12 @@ import {
   UploadOutlined,
   ContactsOutlined,
   LogoutOutlined,
-  CloseOutlined,
-  AlignLeftOutlined,
 } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { Content } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import "./dashboard.css";
+import { BsXLg, BsJustify } from "react-icons/bs";
 
 export default function CreateTimeline() {
   const [sideBarIsOpen, setSideBarIsOpen] = useState(true);
@@ -105,7 +104,7 @@ export default function CreateTimeline() {
             Log Out
           </Menu.Item>
           {sideBarIsOpen && (
-            <Menu.Item icon={<CloseOutlined />}>
+            <Menu.Item icon={<BsXLg />}>
               <a onClick={displaySideBarHandler}>Close</a>
             </Menu.Item>
           )}
@@ -123,7 +122,7 @@ export default function CreateTimeline() {
           <>
             {!sideBarIsOpen && (
               <a onClick={displaySideBarHandler}>
-                <AlignLeftOutlined />
+                <BsJustify size={35} />
               </a>
             )}
 

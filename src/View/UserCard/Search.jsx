@@ -12,13 +12,12 @@ import {
   UploadOutlined,
   ContactsOutlined,
   LogoutOutlined,
-  CloseOutlined,
-  AlignLeftOutlined,
 } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { Content } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import "./dashboard.css";
+import { BsXLg, BsJustify } from "react-icons/bs";
 
 const { Option } = Input;
 
@@ -115,7 +114,7 @@ export default function Search2() {
               Log Out
             </Menu.Item>
             {sideBarIsOpen && (
-              <Menu.Item icon={<CloseOutlined />}>
+              <Menu.Item icon={<BsXLg />}>
                 <a onClick={displaySideBarHandler}>Close</a>
               </Menu.Item>
             )}
@@ -133,7 +132,7 @@ export default function Search2() {
             <>
               {!sideBarIsOpen && (
                 <a onClick={displaySideBarHandler}>
-                  <AlignLeftOutlined />
+                  <BsJustify size={35} />
                 </a>
               )}
               <div className="search-body">

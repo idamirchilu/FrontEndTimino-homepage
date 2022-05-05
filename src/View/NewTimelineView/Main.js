@@ -21,13 +21,12 @@ import {
   UploadOutlined,
   ContactsOutlined,
   LogoutOutlined,
-  CloseOutlined,
-  AlignLeftOutlined,
 } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { Content } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import "./dashboard.css";
+import { BsXLg, BsJustify } from "react-icons/bs";
 
 function Main() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -110,7 +109,7 @@ function Main() {
               Log Out
             </Menu.Item>
             {sideBarIsOpen && (
-              <Menu.Item icon={<CloseOutlined />}>
+              <Menu.Item icon={<BsXLg />}>
                 <a onClick={displaySideBarHandler}>Close</a>
               </Menu.Item>
             )}
@@ -126,8 +125,8 @@ function Main() {
           >
             <>
               {!sideBarIsOpen && (
-                <a className="ml-3" onClick={displaySideBarHandler}>
-                  <AlignLeftOutlined />
+                <a className="ml-3 mt-5" onClick={displaySideBarHandler}>
+                  <BsJustify size={35} />
                 </a>
               )}
 
