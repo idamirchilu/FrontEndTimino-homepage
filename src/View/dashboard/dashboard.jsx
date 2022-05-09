@@ -1,7 +1,5 @@
 import { Layout, Menu } from "antd";
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
   UserOutlined,
   VideoCameraOutlined,
   UploadOutlined,
@@ -12,12 +10,14 @@ import "antd/dist/antd.css";
 import { Content, Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import "./dashboard.css";
-import { Link, Route } from "react-router-dom";
-import signUp from "../Signup/SignUp";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { BsXLg, BsJustify } from "react-icons/bs";
 import SignUp from "../Signup/SignUp";
 
-const Dashboard = () => {
+export default function Dashboard(props) {
+  const [sideBarIsOpen, setSideBarIsOpen] = useState(true);
+  const navigate = useNavigate();
   let state = {
     collapsed: false,
   };
@@ -29,20 +29,33 @@ const Dashboard = () => {
       case "Profile":
         return <h1>item1</h1>;
       case "ViewTimeLine":
-        return window.location.replace("/time-view");
+        return navigate("/time-view");
       case "MakeTimeLine":
-        return window.location.replace("/CreateTimeLine");
+        return navigate("/CreateTimeLine");
       case "Search":
-        return window.location.replace("/Card");
+        return navigate("/Card");
       case "log-out":
-        return window.location.replace("/");
+        return navigate("/");
     }
+  };
+  const displaySideBarHandler = () => {
+    if (sideBarIsOpen) {
+      document.querySelector(".sidebar").style.display = "none";
+    } else {
+      document.querySelector(".sidebar").style.display = "block";
+    }
+    setSideBarIsOpen((prev) => !prev);
   };
 
   return (
     <>
       <Layout className="h-100">
-        <Sider trigger={null} collapsible collapsed={state.collapsed}>
+        <Sider
+          className="sidebar"
+          trigger={null}
+          collapsible
+          collapsed={state.collapsed}
+        >
           <div className="logo" />
           <Menu
             selectedKeys={selectedMenuItem}
@@ -62,30 +75,39 @@ const Dashboard = () => {
             <Menu.Item key="Search" icon={<ContactsOutlined />}>
               Search
             </Menu.Item>
-
             <Menu.Item key="log-out" icon={<LogoutOutlined />}>
               Log Out
             </Menu.Item>
+            {sideBarIsOpen && (
+              <Menu.Item icon={<BsXLg />}>
+                <a onClick={displaySideBarHandler}>Close</a>
+              </Menu.Item>
+            )}
           </Menu>
         </Sider>
         <Layout className="site-layout">
-          <Header
+          {/* <Header
             className="site-layout-background"
             style={{ padding: 0 }}
-          ></Header>
+          ></Header> */}
           <Content
             className="site-layout-background"
             style={{
-              margin: "24px 16px",
-              padding: 24,
+              // margin: "24px 16px",
+              // padding: 24,
               minHeight: 280,
             }}
           >
+            {!sideBarIsOpen && (
+              <a onClick={displaySideBarHandler}>
+                <BsJustify size={35} />
+              </a>
+            )}
+            <>{props.children}</>
             {componentsSwitch(selectedMenuItem)}
           </Content>
         </Layout>
       </Layout>
     </>
   );
-};
-export default Dashboard;
+}
