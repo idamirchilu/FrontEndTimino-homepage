@@ -3,6 +3,7 @@
 * {
   font-family: "Roboto", sans-serif;
 }
+
 .search-body {
   display: flex;
   align-items: center;
@@ -18,7 +19,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 0fr));
   gap: 1rem;
-  margin: 200px 0px;
+  /* margin: 200px 0px; */
   padding: 0;
   list-style-type: none;
   justify-content: center;

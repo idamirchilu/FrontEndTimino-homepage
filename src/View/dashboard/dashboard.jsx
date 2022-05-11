@@ -9,9 +9,9 @@ import {
 import "antd/dist/antd.css";
 import { Content, Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
-import "./dashboard.css";
+import "./Dashboard.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { BsXLg, BsJustify } from "react-icons/bs";
 import SignUp from "../Signup/SignUp";
 
@@ -27,17 +27,20 @@ export default function Dashboard(props) {
   const componentsSwitch = (key) => {
     switch (key) {
       case "Profile":
-        return <h1>item1</h1>;
+        return window.location.replace("/dashboard");
       case "ViewTimeLine":
-        return navigate("/time-view");
+        return window.location.replace("/time-view");
       case "MakeTimeLine":
-        return navigate("/CreateTimeLine");
+        return window.location.replace("/CreateTimeLine");
       case "Search":
-        return navigate("/Card");
+        return window.location.replace("/Card");
       case "log-out":
-        return navigate("/");
+        return window.location.replace("/");
+      default:
+        return;
     }
   };
+
   const displaySideBarHandler = () => {
     if (sideBarIsOpen) {
       document.querySelector(".sidebar").style.display = "none";
@@ -47,6 +50,7 @@ export default function Dashboard(props) {
     setSideBarIsOpen((prev) => !prev);
   };
 
+  const contentClassName = props.className;
   return (
     <>
       <Layout className="h-100">
@@ -66,9 +70,11 @@ export default function Dashboard(props) {
             <Menu.Item key="Profile" icon={<UserOutlined />}>
               <span>Profile</span>
             </Menu.Item>
+
             <Menu.Item key="ViewTimeLine" icon={<VideoCameraOutlined />}>
               View Your TimeLine
             </Menu.Item>
+
             <Menu.Item key="MakeTimeLine" icon={<UploadOutlined />}>
               Make New TimeLine
             </Menu.Item>
@@ -90,14 +96,7 @@ export default function Dashboard(props) {
             className="site-layout-background"
             style={{ padding: 0 }}
           ></Header> */}
-          <Content
-            className="site-layout-background"
-            style={{
-              // margin: "24px 16px",
-              // padding: 24,
-              minHeight: 280,
-            }}
-          >
+          <Content className={`site-layout-background ${contentClassName}`}>
             {!sideBarIsOpen && (
               <a onClick={displaySideBarHandler}>
                 <BsJustify size={35} />

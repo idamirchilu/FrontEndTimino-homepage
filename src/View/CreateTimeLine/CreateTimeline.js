@@ -3,7 +3,7 @@ import { request } from "./Network.js";
 import "antd/dist/antd.css";
 import "./CreateTimeLine.css";
 import "antd/dist/antd.css";
-import Dashboard from "../dashboard/dashboard.jsx";
+import Dashboard from "../dashboard/Dashboard";
 
 export default function CreateTimeline() {
   const titleInputRef = useRef();
@@ -32,7 +32,7 @@ export default function CreateTimeline() {
   };
 
   return (
-    <Dashboard>
+    <Dashboard className="createTimeLine">
       <div className="form-style-5">
         <form className="create-submit-box" onSubmit={handleSubmit}>
           <fieldset style={{ marginTop: "10px" }}>
@@ -76,9 +76,3 @@ export default function CreateTimeline() {
     </Dashboard>
   );
 }
-
-// const MakeTimeline = () => {
-//     const [componentSize, setComponentSize] = useState('large');
-//
-//
-// }
