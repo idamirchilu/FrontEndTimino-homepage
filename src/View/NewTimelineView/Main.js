@@ -74,7 +74,12 @@ export default function Main() {
                         {element.buttonText}
                       </a>
                     )}
-                    <a className="button workButton">upload image</a>
+                    <a
+                      onClick={handleUploadImage}
+                      className="button workButton"
+                    >
+                      upload image
+                    </a>
                   </VerticalTimelineElement>
                 );
               })}

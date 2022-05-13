@@ -124,7 +124,7 @@ export default class Search2 extends React.Component {
                 <li>
                   <div class="our-team">
                     <div class="picture">
-                      <img class="img-fluid" src={c.avatar} />
+                      <img class="img-fluid" src={c.avatar} alt="avatar" />
                     </div>
                     <div class="team-content">
                       <h3 class="name">{c.username}</h3>
