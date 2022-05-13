@@ -1,61 +1,125 @@
-import React, { useState } from "react";
-import { Input, Select } from "antd";
+import React from "react";
+import { Input, Select, AutoComplete } from "antd";
 import "./Search.css";
 import "antd/dist/antd.min.css";
 import axios from "axios";
-import Search from "antd/es/input/Search";
 import "antd/dist/antd.css";
 import Dashboard from "../dashboard/Dashboard";
 
-const { Option } = Input;
-
-const selectBefore = (
-  <Select defaultValue="user" style={{ width: "100px" }}>
-    <Option value="user">User</Option>
-    <Option value="timeline">Timeline</Option>
-  </Select>
-);
-
-export default function Search2() {
-  let state = {
-    collapsed: false,
+export default class Search2 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.ac = React.createRef();
+  }
+  state = {
+    fetchData: [],
+    value: "",
+    server: "timeline",
   };
 
-  const [fetchData, setFetchData] = useState([]);
-  let onSearch = (value) => {
+  TimelineSearchResult = (timeline) => {
+    if (timeline === "") {
+      this.setState({ options: [] });
+      return 0;
+    }
+
+    const ref = this;
     axios
-      .get("https://timino-app-2.iran.liara.run//api/user/search", {
-        params: {
-          username: value,
-        },
+      .get(
+        "https://timino-app-2.iran.liara.run//api/timeline/search?title=" +
+          timeline
+      )
+      .then(function (response) {
+        console.log(response.data.data);
+        ref.setState({ fetchData: response.data.data });
       })
-      .then((res) => {
-        setFetchData(res.data.data.users);
-        // data=res.data.data.users;
-        console.log(fetchData);
+      .catch(function (error) {
+        ref.setState({ fetchData: [] });
+        console.log(error);
       });
-    state.loading = false;
   };
 
-  return (
-    <Dashboard className="search">
-      <div>
+  UserSearchResult = (users) => {
+    if (users === "") {
+      this.setState({ options: [] });
+      return 0;
+    }
+
+    const ref = this;
+    axios
+      .get(
+        "https://timino-app-2.iran.liara.run//api/user/search_suggestion?username=" +
+          users
+      )
+      .then(function (response) {
+        console.log(response.data.data);
+        ref.setState({ fetchData: response.data.data });
+      })
+      .catch(function (error) {
+        ref.setState({ fetchData: [] });
+        console.log(error);
+      });
+  };
+
+  onSearch = (e) => {
+    if (this.state.server === "timeline") {
+      this.TimelineSearchResult(e);
+    } else {
+      this.UserSearchResult(e);
+    }
+  };
+
+  onSelect = (data) => {
+    console.log("onSelect", data);
+  };
+
+  onChangeSelect = (value) => {
+    console.log(value);
+    this.setState({ server: value.value });
+  };
+
+  render() {
+    return (
+      <Dashboard className="search">
         <div className="search-body">
-          <div className="box">
-            <Search
-              size="large"
-              placeholder="input search ..."
-              onSearch={onSearch}
-              enterButton
-              allowClear
-              addonBefore={selectBefore}
-            />
+          <div>
+            <Select
+              labelInValue
+              placement="topRight"
+              onChange={(value) => this.onChangeSelect(value)}
+              defaultValue="timeline"
+              style={{ width: "100px" }}
+            >
+              <Select.Option value="timeline">Timeline</Select.Option>
+              <Select.Option value="user">User</Select.Option>
+            </Select>
+          </div>
+          <div>
+            <AutoComplete
+              dropdownClassName="autocompletedrpdwn"
+              notFoundContent="not Found!"
+              options={this.state.options}
+              onSelect={(e) => {
+                this.onSelect(e);
+              }}
+              onChange={(e) => {
+                this.onSearch(e);
+              }}
+            >
+              <Input.Search
+                size="large"
+                placeholder="input search ..."
+                enterButton
+                onSearch={(e) => this.onSearch(e)}
+                allowClear
+              />
+            </AutoComplete>
           </div>
         </div>
 
         <div>
           <ul className="cards">
-            {fetchData.map((c) => {
+            {this.state.fetchData.map((c) => {
               return (
                 <li>
                   <div class="our-team">
@@ -72,7 +136,7 @@ export default function Search2() {
             })}
           </ul>
         </div>
-      </div>
-    </Dashboard>
-  );
+      </Dashboard>
+    );
+  }
 }

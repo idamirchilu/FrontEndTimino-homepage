@@ -16,7 +16,7 @@ import { BsXLg, BsJustify } from "react-icons/bs";
 import SignUp from "../Signup/SignUp";
 
 export default function Dashboard(props) {
-  const [sideBarIsOpen, setSideBarIsOpen] = useState(true);
+  const [sideBarIsOpen, setSideBarIsOpen] = useState(false);
   const navigate = useNavigate();
   let state = {
     collapsed: false,
@@ -55,6 +55,7 @@ export default function Dashboard(props) {
     <>
       <Layout className="h-100">
         <Sider
+          style={{ display: "none", position: "absolute", height: "100vh" }}
           className="sidebar"
           trigger={null}
           collapsible

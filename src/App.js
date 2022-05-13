@@ -22,7 +22,7 @@ import MessageList from "./View/Chat/MessageList";
 const RoutePath = () => {
   let routes = useRoutes([
     { path: "/", element: <LandingPage /> },
-    { path: "/Chat", element: <MessageList /> },
+    // { path: "/Chat", element: <MessageList /> },
     { path: "/dashboard", element: <Profile /> },
     { path: "/login", element: <Login /> },
     { path: "/signup", element: <SignInSignUp /> },
