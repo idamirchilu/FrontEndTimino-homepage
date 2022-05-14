@@ -1,7 +1,6 @@
-import "./ForgetPasswordPage.css";
+import classes from "./ForgetPasswordPage.module.css";
 import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-//import { Input } from "antd";
 import qs from "qs";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -41,9 +40,9 @@ export default function ForgetPasswordPage() {
   };
 
   return (
-    <div className="forget-pass">
-      <div className="forget-pass-inner">
-        <form className="formd" onSubmit={HandleSubmit}>
+    <div className={classes["forget-pass"]}>
+      <div className={classes["forget-pass-inner"]}>
+        <form className={classes["formd"]} onSubmit={HandleSubmit}>
           <h2>Reset your password</h2>
           <h5>
             Enter your email address and we will send you Verification Code

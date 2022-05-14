@@ -100,7 +100,7 @@ export default function Dashboard(props) {
           <Content className={`site-layout-background ${contentClassName}`}>
             {!sideBarIsOpen && (
               <a onClick={displaySideBarHandler}>
-                <BsJustify size={35} />
+                <BsJustify color="#fff" size={35} />
               </a>
             )}
             <>{props.children}</>
