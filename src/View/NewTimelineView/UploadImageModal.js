@@ -11,17 +11,17 @@ export default function UploadImageModal(props) {
 
     console.log(selectedFileInputRef.current.files[0]);
 
-    // var requestOptions = {
-    //   method: "POST",
-    //   body: formdata,
-    //   redirect: "follow",
-    // };
+    var requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
 
-    // fetch("https://timino-app-2.iran.liara.run//upload/file", requestOptions)
-    //   .then((response) => response.text())
-    //   .then((result) => console.log(result))
-    //   .catch((error) => console.log("error", error));
-    // onHandle();
+    fetch("https://timino-app-2.iran.liara.run//upload/file", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+    onHandle();
   };
 
   return (
