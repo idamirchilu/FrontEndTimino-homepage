@@ -9,7 +9,17 @@ export default function UploadImageModal(props) {
     var formdata = new FormData();
     formdata.append("file", selectedFileInputRef.current.files[0]);
 
-    console.log(selectedFileInputRef.current.files[0]);
+    const fileSize = selectedFileInputRef.current.files[0].size;
+
+    if (fileSize < 200000) {
+      alert("your file size less than 200KB");
+      return;
+    }
+
+    if (fileSize > 1000000) {
+      alert("your file size grather than 1MB");
+      return;
+    }
 
     var requestOptions = {
       method: "POST",

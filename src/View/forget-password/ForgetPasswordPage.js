@@ -21,7 +21,7 @@ export default function ForgetPasswordPage() {
     });
     const config = {
       method: "POST",
-      url: "https://timino-application.iran.liara.run//api/auth/forgot-password/send-email",
+      url: "https://timino-app-2.iran.liara.run//api/auth/forgot-password/send-email",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded", //x-www-form-urlencoded
       },
